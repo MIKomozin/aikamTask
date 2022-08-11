@@ -1,0 +1,75 @@
+{
+  "type": "search",
+  "results": [
+    {
+      "criteria": {
+        "lastName": "Аксенов"
+      },
+      "results": [
+        {
+          "lastName": "Аксенов",
+          "firstName": "Андрей"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "productName": "Кока-кола",
+        "minTimes": 4
+      },
+      "results": [
+        {
+          "lastName": "Аксенов",
+          "firstName": "Андрей"
+        },
+        {
+          "lastName": "Упрямов",
+          "firstName": "Виталий"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "minExpenses": 200,
+        "maxExpenses": 600
+      },
+      "results": [
+        {
+          "lastName": "Аксенов",
+          "firstName": "Андрей"
+        },
+        {
+          "lastName": "Упрямов",
+          "firstName": "Виталий"
+        },
+        {
+          "lastName": "Петров",
+          "firstName": "Петр"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "badCustomers": 4
+      },
+      "results": [
+        {
+          "lastName": "Шабанов",
+          "firstName": "Леха"
+        },
+        {
+          "lastName": "Комозин",
+          "firstName": "Максим"
+        },
+        {
+          "lastName": "Иванов",
+          "firstName": "Иван"
+        },
+        {
+          "lastName": "Петров",
+          "firstName": "Петр"
+        }
+      ]
+    }
+  ]
+}

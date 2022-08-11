@@ -1,0 +1,8 @@
+{
+  "criterias": [
+    {"lastName": "Аксенов"},
+    {"productName": "Кока-кола", "minTimes": 4},
+    {"minExpenses": 200, "maxExpenses": 600},
+    {"badCustomers": 4}
+  ]
+}
