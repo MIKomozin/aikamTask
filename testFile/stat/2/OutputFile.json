@@ -1,0 +1,72 @@
+{
+  "type": "stat",
+  "totalDays": 34,
+  "customers": [
+    {
+      "name": "Захаров Макcим",
+      "purchases": [
+        {
+          "name": "Кофе",
+          "expenses": 400
+        }
+      ],
+      "totalExpenses": 400
+    },
+    {
+      "name": "Упрямов Виталий",
+      "purchases": [
+        {
+          "name": "Кока-кола",
+          "expenses": 100
+        },
+        {
+          "name": "Молоко",
+          "expenses": 75
+        }
+      ],
+      "totalExpenses": 175
+    },
+    {
+      "name": "Аксенов Андрей",
+      "purchases": [
+        {
+          "name": "Кока-кола",
+          "expenses": 100
+        }
+      ],
+      "totalExpenses": 100
+    },
+    {
+      "name": "Шишкин Николай",
+      "purchases": [
+        {
+          "name": "Молоко",
+          "expenses": 75
+        }
+      ],
+      "totalExpenses": 75
+    },
+    {
+      "name": "Иванов Иван",
+      "purchases": [
+        {
+          "name": "Минеральная вода",
+          "expenses": 50
+        }
+      ],
+      "totalExpenses": 50
+    },
+    {
+      "name": "Суворов Андрей",
+      "purchases": [
+        {
+          "name": "Хлеб",
+          "expenses": 35
+        }
+      ],
+      "totalExpenses": 35
+    }
+  ],
+  "totalExpenses": 835,
+  "avgExpenses": 139.0
+}

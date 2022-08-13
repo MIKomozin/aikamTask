@@ -1,0 +1,112 @@
+{
+  "type": "search",
+  "results": [
+    {
+      "criteria": {
+        "lastName": "Иванов"
+      },
+      "results": [
+        {
+          "lastName": "Иванов",
+          "firstName": "Иван"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "productName": "Минеральная вода",
+        "minTimes": 5
+      },
+      "results": []
+    },
+    {
+      "criteria": {
+        "minExpenses": 112,
+        "maxExpenses": 4000
+      },
+      "results": [
+        {
+          "lastName": "Суворов",
+          "firstName": "Андрей"
+        },
+        {
+          "lastName": "Аксенов",
+          "firstName": "Андрей"
+        },
+        {
+          "lastName": "Захаров",
+          "firstName": "Макcим"
+        },
+        {
+          "lastName": "Упрямов",
+          "firstName": "Виталий"
+        },
+        {
+          "lastName": "Петров",
+          "firstName": "Петр"
+        },
+        {
+          "lastName": "Шишкин",
+          "firstName": "Николай"
+        },
+        {
+          "lastName": "Иванов",
+          "firstName": "Иван"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "badCustomers": 3
+      },
+      "results": [
+        {
+          "lastName": "Шабанов",
+          "firstName": "Леха"
+        },
+        {
+          "lastName": "Комозин",
+          "firstName": "Максим"
+        },
+        {
+          "lastName": "Иванов",
+          "firstName": "Иван"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "lastName": "Петров"
+      },
+      "results": [
+        {
+          "lastName": "Петров",
+          "firstName": "Петр"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "lastName": "Аксенов"
+      },
+      "results": [
+        {
+          "lastName": "Аксенов",
+          "firstName": "Андрей"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "productName": "Краковская колбаса",
+        "minTimes": 2
+      },
+      "results": [
+        {
+          "lastName": "Суворов",
+          "firstName": "Андрей"
+        }
+      ]
+    }
+  ]
+}

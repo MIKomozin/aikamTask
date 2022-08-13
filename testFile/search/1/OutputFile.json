@@ -34,6 +34,10 @@
           "firstName": "Андрей"
         },
         {
+          "lastName": "Захаров",
+          "firstName": "Макcим"
+        },
+        {
           "lastName": "Упрямов",
           "firstName": "Виталий"
         },
@@ -65,8 +69,8 @@
           "firstName": "Максим"
         },
         {
-          "lastName": "Шишкин",
-          "firstName": "Николай"
+          "lastName": "Иванов",
+          "firstName": "Иван"
         }
       ]
     },

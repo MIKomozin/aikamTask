@@ -1,0 +1,122 @@
+{
+  "type": "stat",
+  "totalDays": 75,
+  "customers": [
+    {
+      "name": "Захаров Макcим",
+      "purchases": [
+        {
+          "name": "Кофе",
+          "expenses": 1200
+        },
+        {
+          "name": "Чай",
+          "expenses": 120
+        }
+      ],
+      "totalExpenses": 1320
+    },
+    {
+      "name": "Суворов Андрей",
+      "purchases": [
+        {
+          "name": "Краковская колбаса",
+          "expenses": 500
+        },
+        {
+          "name": "Сок",
+          "expenses": 150
+        },
+        {
+          "name": "Кока-кола",
+          "expenses": 100
+        },
+        {
+          "name": "Батон",
+          "expenses": 80
+        },
+        {
+          "name": "Хлеб",
+          "expenses": 35
+        }
+      ],
+      "totalExpenses": 865
+    },
+    {
+      "name": "Шишкин Николай",
+      "purchases": [
+        {
+          "name": "Краковская колбаса",
+          "expenses": 250
+        },
+        {
+          "name": "Чай",
+          "expenses": 120
+        },
+        {
+          "name": "Кока-кола",
+          "expenses": 100
+        },
+        {
+          "name": "Молоко",
+          "expenses": 75
+        },
+        {
+          "name": "Батон",
+          "expenses": 40
+        }
+      ],
+      "totalExpenses": 585
+    },
+    {
+      "name": "Упрямов Виталий",
+      "purchases": [
+        {
+          "name": "Кока-кола",
+          "expenses": 500
+        },
+        {
+          "name": "Молоко",
+          "expenses": 75
+        }
+      ],
+      "totalExpenses": 575
+    },
+    {
+      "name": "Аксенов Андрей",
+      "purchases": [
+        {
+          "name": "Кока-кола",
+          "expenses": 300
+        }
+      ],
+      "totalExpenses": 300
+    },
+    {
+      "name": "Петров Петр",
+      "purchases": [
+        {
+          "name": "Кока-кола",
+          "expenses": 200
+        }
+      ],
+      "totalExpenses": 200
+    },
+    {
+      "name": "Иванов Иван",
+      "purchases": [
+        {
+          "name": "Кока-кола",
+          "expenses": 100
+        },
+        {
+          "name": "Минеральная вода",
+          "expenses": 50
+        }
+      ],
+      "totalExpenses": 150
+    }
+  ],
+  "totalExpenses": 3995,
+  "avgExpenses": 570.0
+}

@@ -14,17 +14,23 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public class DataFromDB {
+public class FromDataBaseToFile {
 
-    public static final String URL = "jdbc:postgresql://localhost:5432/aikam";
-    public static final String USER = "Maksim";
-    public static final String PASSWORD = null;
+    public void fromDBToJsonFileForSearch(RootInputForSearch rootInputForSearch, Connection connection, String pathOutFile) throws Exception {
+        if (rootInputForSearch == null) {
+            ErrorOut error = new ErrorOut();
+            error.setType("error");
+            error.setMessage("Входной файл пустой");
+            new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
+            throw new Exception("Входной файл пустой");
+        }
 
-    public void takeDataFromDataAndWriteToJsonFileForSearch(RootInputForSearch rootInputForSearch) {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        if (rootInputForSearch.getCriterias() == null) {
+            ErrorOut error = new ErrorOut();
+            error.setType("error");
+            error.setMessage("Проверьте правильность входных данных. В файле отсутствуют критерии поиска");
+            new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
+            throw new Exception("Проверьте правильность входных данных. В файле отсутствуют критерии поиска");
         }
 /*
 сопоставим данные полученные из файла json парсингом в объекты класса Сriteria с БД и получим необходимых нам данные.
@@ -40,49 +46,59 @@ public class DataFromDB {
 //пройдемся циклом по полученным объектам класса Criteria, на основании которых получим данные из БД
 
         try {
-            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             for (Criteria criteria: rootInputForSearch.getCriterias()) {
-                Resultat resultat = new Resultat();
-                ArrayList<Result> results = new ArrayList<>();
-                PreparedStatement preparedStatement;
-                if (criteria.getLastName() != null && criteria.getProductName() == null && criteria.getMinTimes() == null
-                && criteria.getMinExpenses() == null && criteria.getMaxExpenses() == null && criteria.getBadCustomers() == null) {
-                    String sqlQuery = "SELECT first_name, last_name FROM buyers WHERE last_name = ?";
-                    preparedStatement = connection.prepareStatement(sqlQuery);
-                    preparedStatement.setString(1, criteria.getLastName());
-                } else if (criteria.getProductName() != null && criteria.getMinTimes() != null && criteria.getLastName() == null
-                        && criteria.getMinExpenses() == null && criteria.getMaxExpenses() == null && criteria.getBadCustomers() == null) {
-                    String sqlQuery = "SELECT first_name, last_name, count(*) FROM buyers\n" +
-                            "JOIN purchases ON buyers.id = buyers_id\n" +
-                            "JOIN products ON products_id = products.id\n" +
-                            "WHERE product_name = ?\n" +
-                            "GROUP BY (first_name, last_name)\n" +
-                            "HAVING count(*) >= ?;";
-                    preparedStatement = connection.prepareStatement(sqlQuery);
-                    preparedStatement.setString(1, criteria.getProductName());
-                    preparedStatement.setInt(2, criteria.getMinTimes());
-                } else if (criteria.getMinExpenses() != null && criteria.getMaxExpenses() != null && criteria.getLastName() == null
-                        && criteria.getProductName() == null && criteria.getMinTimes() == null && criteria.getBadCustomers() == null) {
-                    String sqlQuery = "SELECT first_name, last_name, SUM(price) FROM buyers\n" +
-                            "JOIN purchases ON buyers.id = buyers_id\n" +
-                            "JOIN products ON products_id = products.id\n" +
-                            "GROUP BY (first_name, last_name)\n" +
-                            "HAVING SUM(price) >= ? AND SUM(price) <= ?";
-                    preparedStatement = connection.prepareStatement(sqlQuery);
-                    preparedStatement.setInt(1, criteria.getMinExpenses());
-                    preparedStatement.setInt(2, criteria.getMaxExpenses());
-                } else if (criteria.getBadCustomers() != null && criteria.getLastName() == null && criteria.getProductName() == null
-                        && criteria.getMinTimes() == null && criteria.getMinExpenses() == null && criteria.getMaxExpenses() == null) {
-                    String sqlQuery = "SELECT first_name, last_name, SUM(price) AS summ FROM buyers\n" +
-                            "JOIN purchases ON buyers.id = buyers_id\n" +
-                            "JOIN products ON products_id = products.id\n" +
-                            "GROUP BY (first_name, last_name)\n" +
-                            "ORDER BY summ LIMIT ?\n";
-                    preparedStatement = connection.prepareStatement(sqlQuery);
-                    preparedStatement.setInt(1, criteria.getBadCustomers());
-                } else {
-                    continue;
+                if (criteria == null) {
+                    ErrorOut error = new ErrorOut();
+                    error.setType("error");
+                    error.setMessage("Проверьте правильность введеных данных, имеется объект Criteria == null");
+                    new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
+                    throw new Exception("Проверьте правильность введеных данных, имеется объект Criteria == null");
                 }
+                    Resultat resultat = new Resultat();
+                    ArrayList<Result> results = new ArrayList<>();
+                    PreparedStatement preparedStatement;
+                    if (criteria.getLastName() != null && criteria.getProductName() == null && criteria.getMinTimes() == null
+                            && criteria.getMinExpenses() == null && criteria.getMaxExpenses() == null && criteria.getBadCustomers() == null) {
+                        String sqlQuery = "SELECT first_name, last_name FROM buyers WHERE last_name = ?";
+                        preparedStatement = connection.prepareStatement(sqlQuery);
+                        preparedStatement.setString(1, criteria.getLastName());
+                    } else if (criteria.getProductName() != null && criteria.getMinTimes() != null && criteria.getLastName() == null
+                            && criteria.getMinExpenses() == null && criteria.getMaxExpenses() == null && criteria.getBadCustomers() == null) {
+                        String sqlQuery = "SELECT first_name, last_name, count(*) FROM buyers\n" +
+                                "JOIN purchases ON buyers.id = buyers_id\n" +
+                                "JOIN products ON products_id = products.id\n" +
+                                "WHERE product_name = ?\n" +
+                                "GROUP BY (first_name, last_name)\n" +
+                                "HAVING count(*) >= ?;";
+                        preparedStatement = connection.prepareStatement(sqlQuery);
+                        preparedStatement.setString(1, criteria.getProductName());
+                        preparedStatement.setInt(2, criteria.getMinTimes());
+                    } else if (criteria.getMinExpenses() != null && criteria.getMaxExpenses() != null && criteria.getLastName() == null
+                            && criteria.getProductName() == null && criteria.getMinTimes() == null && criteria.getBadCustomers() == null) {
+                        String sqlQuery = "SELECT first_name, last_name, SUM(price) FROM buyers\n" +
+                                "JOIN purchases ON buyers.id = buyers_id\n" +
+                                "JOIN products ON products_id = products.id\n" +
+                                "GROUP BY (first_name, last_name)\n" +
+                                "HAVING SUM(price) >= ? AND SUM(price) <= ?";
+                        preparedStatement = connection.prepareStatement(sqlQuery);
+                        preparedStatement.setInt(1, criteria.getMinExpenses());
+                        preparedStatement.setInt(2, criteria.getMaxExpenses());
+                    } else if (criteria.getBadCustomers() != null && criteria.getLastName() == null && criteria.getProductName() == null
+                            && criteria.getMinTimes() == null && criteria.getMinExpenses() == null && criteria.getMaxExpenses() == null) {
+                        String sqlQuery = "SELECT first_name, last_name, SUM(price) AS summ FROM buyers\n" +
+                                "JOIN purchases ON buyers.id = buyers_id\n" +
+                                "JOIN products ON products_id = products.id\n" +
+                                "GROUP BY (first_name, last_name)\n" +
+                                "ORDER BY summ LIMIT ?\n";
+                        preparedStatement = connection.prepareStatement(sqlQuery);
+                        preparedStatement.setInt(1, criteria.getBadCustomers());
+                    } else {
+                        ErrorOut error = new ErrorOut();
+                        error.setType("error");
+                        error.setMessage("Неправильно введены данные для поиска по критериям");
+                        new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
+                        throw new Exception("Неправильно введены данные для поиска по критериям");
+                    }
                     ResultSet resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
                         Result result = new Result();
@@ -102,28 +118,37 @@ public class DataFromDB {
         rootOut.setResultats(resultats);
 
         //пишем полученные данные в файл
-        new GsonParser().parseFromJavaToJsonForSearch(rootOut);
+        new GsonParser().parseFromJavaToJsonForSearch(rootOut, pathOutFile);
 
     }
 
-    public void takeDataFromDataAndWriteToJsonFileForStat(RootInputForStat rootInputForStat) throws Exception {
+    public void fromDBToJsonFileForStat(RootInputForStat rootInputForStat, Connection connection, String pathOutFile) throws Exception {
+        if (rootInputForStat == null) {
+            ErrorOut error = new ErrorOut();
+            error.setType("error");
+            error.setMessage("Входной файл пустой");
+            new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
+            throw new Exception("Входной файл пустой");
+        }
+
+        if (rootInputForStat.getStartDate() == null || rootInputForStat.getEndDate() == null) {
+            ErrorOut error = new ErrorOut();
+            error.setType("error");
+            error.setMessage("Проверьте правильность входных данных. В файле отсутствую интервалы дат");
+            new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
+            throw new Exception("Проверьте правильность входных данных. В файле отсутствую интервалы дат");
+        }
+
         RootOutputForStat rootOut = new RootOutputForStat();
         rootOut.setType("stat");
 
         //количество рабочих дней между указанными датами, и проверим правильно ли введена дата
-        int workDays = numberOfWorkDays(rootInputForStat.getStartDate(), rootInputForStat.getEndDate());
+        int workDays = numberOfWorkDays(rootInputForStat.getStartDate(), rootInputForStat.getEndDate(), pathOutFile);
         rootOut.setTotalDays(workDays);
 
         ArrayList<Customer> customers = new ArrayList<>();
 
         try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sqlQuery = "SELECT textcat(textcat(last_name,' '), first_name) AS full_name, product_name, price \n" +
                     "FROM buyers JOIN purchases ON buyers.id = buyers_id JOIN products ON products_id = products.id\n" +
                     "--промежуток дат с учетом выходных дней\n" +
@@ -200,18 +225,23 @@ public class DataFromDB {
 
         //средний чек
         int numberOfCustomers = customers.size();
-        double avgExpenses = totalExpenses/numberOfCustomers;
-        rootOut.setAvgExpenses(avgExpenses);
+        if (numberOfCustomers != 0) {
+            double avgExpenses = totalExpenses / numberOfCustomers;
+            rootOut.setAvgExpenses(avgExpenses);
+        } else {
+            rootOut.setAvgExpenses(0);
+        }
+
 
         //пишем полученные данные в файл
-        new GsonParser().parseFromJavaToJsonForStat(rootOut);
+        new GsonParser().parseFromJavaToJsonForStat(rootOut, pathOutFile);
     }
 
     //метод для определения количества рабочих дней между датами
-    public int numberOfWorkDays(String start, String end) throws Exception {
+    public int numberOfWorkDays(String start, String end, String pathOutFile) throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate startDate = null;
-        LocalDate endDate = null;
+        LocalDate startDate;
+        LocalDate endDate;
         try {
             startDate = LocalDate.parse(start, formatter);
             endDate = LocalDate.parse(end, formatter);
@@ -219,7 +249,7 @@ public class DataFromDB {
             ErrorOut error = new ErrorOut();
             error.setType("error");
             error.setMessage("Неправильный формат даты");
-            new GsonParser().parseFromJavaToJsonForError(error);
+            new GsonParser().parseFromJavaToJsonForError(error, pathOutFile);
             throw new Exception("Неправильный формат даты");
         }
 
