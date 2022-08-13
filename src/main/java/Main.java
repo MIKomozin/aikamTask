@@ -1,5 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import model.search.RootInputForSearch;
+import model.stat.RootInputForStat;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -47,7 +49,20 @@ public class Main {
         //System.out.println(new GsonParser().parseFromJsonToJava());
 
         // pretty print
-        new GsonParser().parseFromJavaToJson();
+        //парсим данные в класс RootInputForSearch
+        GsonParser gsonParser = new GsonParser();
+        RootInputForSearch rootInputForSearch = gsonParser.parseFromJsonToJavaForSearch();
+
+        //пишем данные в выходной файл
+        DataFromDB dataFromDB = new DataFromDB();
+        dataFromDB.takeDataFromDataAndWriteToJsonFileForSearch(rootInputForSearch);
+
+//        GsonParser gsonParser = new GsonParser();
+//        RootInputForStat rootInputForStat = gsonParser.parseFromJsonToJavaForStat();
+//
+//        //пишем данные в выходной файл
+//        DataFromDB dataFromDB = new DataFromDB();
+//        dataFromDB.takeDataFromDataAndWriteToJsonFileForStat(rootInputForStat);
 
     }
 }

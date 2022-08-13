@@ -13,10 +13,4 @@ public class RootInputForSearch {
         this.criterias = criterias;
     }
 
-    @Override
-    public String toString() {
-        return "model.search.RootInputForSearch{" +
-                "criterias=" + criterias +
-                '}';
-    }
 }

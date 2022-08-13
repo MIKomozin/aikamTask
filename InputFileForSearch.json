@@ -1,8 +1,9 @@
 {
   "criterias": [
-    {"lastName": "Аксенов"},
-    {"productName": "Кока-кола", "minTimes": 4},
-    {"minExpenses": 200, "maxExpenses": 600},
-    {"badCustomers": 4}
+    {"lastName": "Иванов"},
+    {"productName": "Минеральная вода", "minTimes": 5},
+    {"minExpenses": 112, "maxExpenses": 4000},
+    {"badCustomers": 3},
+    {"lastName": "Петров"}
   ]
 }

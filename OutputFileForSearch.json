@@ -3,37 +3,32 @@
   "results": [
     {
       "criteria": {
-        "lastName": "Аксенов"
+        "lastName": "Иванов"
       },
       "results": [
         {
-          "lastName": "Аксенов",
-          "firstName": "Андрей"
+          "lastName": "Иванов",
+          "firstName": "Иван"
         }
       ]
     },
     {
       "criteria": {
-        "productName": "Кока-кола",
-        "minTimes": 4
+        "productName": "Минеральная вода",
+        "minTimes": 5
+      },
+      "results": []
+    },
+    {
+      "criteria": {
+        "minExpenses": 112,
+        "maxExpenses": 4000
       },
       "results": [
         {
-          "lastName": "Аксенов",
+          "lastName": "Суворов",
           "firstName": "Андрей"
         },
-        {
-          "lastName": "Упрямов",
-          "firstName": "Виталий"
-        }
-      ]
-    },
-    {
-      "criteria": {
-        "minExpenses": 200,
-        "maxExpenses": 600
-      },
-      "results": [
         {
           "lastName": "Аксенов",
           "firstName": "Андрей"
@@ -45,12 +40,20 @@
         {
           "lastName": "Петров",
           "firstName": "Петр"
+        },
+        {
+          "lastName": "Шишкин",
+          "firstName": "Николай"
+        },
+        {
+          "lastName": "Иванов",
+          "firstName": "Иван"
         }
       ]
     },
     {
       "criteria": {
-        "badCustomers": 4
+        "badCustomers": 3
       },
       "results": [
         {
@@ -62,9 +65,16 @@
           "firstName": "Максим"
         },
         {
-          "lastName": "Иванов",
-          "firstName": "Иван"
-        },
+          "lastName": "Шишкин",
+          "firstName": "Николай"
+        }
+      ]
+    },
+    {
+      "criteria": {
+        "lastName": "Петров"
+      },
+      "results": [
         {
           "lastName": "Петров",
           "firstName": "Петр"
